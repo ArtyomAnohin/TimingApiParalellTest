@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Test SUITE" parallel="tests" data-provider-thread-count="20">
+
+    <test name="Test 1">
+        <parameter name="user" value="1"/>
+        <classes>
+            <class name="com.timingapi.autotest.LoadTest"/>
+        </classes>
+    </test>
+
+</suite>

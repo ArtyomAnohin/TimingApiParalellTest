@@ -1,0 +1,29 @@
+seleniumhub:
+  image: selenium/hub
+  ports:
+    - 4444:4444
+  container_name: seleniumhub
+
+firefoxnode:
+  image: selenium/node-firefox-debug
+  volumes:
+    - ~/Work:/e2e/uploads
+    - ~/Work/tmp:/e2e/uploads/tmp
+  ports:
+    - 5900
+  expose:
+    - "80"
+  links:
+    - seleniumhub:hub
+
+chromenode:
+  image: selenium/node-chrome-debug
+  volumes:
+    - ~/Work:/e2e/uploads
+    - ~/Work/tmp:/e2e/uploads/tmp
+  ports:
+    - 5900
+  expose:
+    - "80"
+  links:
+    - seleniumhub:hub
