@@ -13,7 +13,7 @@ import static com.timingapi.base.TimingAPI.getHar;
 import static com.timingapi.base.TimingAPI.getPageLoadTime;
 
 /**
- * Created by User on 19-Nov-16.
+ * Created by artyom on 19-Nov-16.
  */
 public class SiteSteps extends BaseTest {
 

@@ -1,7 +1,7 @@
 package com.timingapi.base;
 
 /**
- * Created by User on 22-Nov-16.
+ * Created by artyom on 22-Nov-16.
  */
 public class PageLoadTiming {
     public Long navigationStart;

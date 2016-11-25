@@ -27,3 +27,8 @@ chromenode:
     - "80"
   links:
     - seleniumhub:hub
+
+phantomjsnode:
+  image: akeem/selenium-node-phantomjs
+  links:
+    - seleniumhub:hub

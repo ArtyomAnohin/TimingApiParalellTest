@@ -36,26 +36,13 @@ public class BaseTest {
         }
         if (browser == Browsers.Firefox){
             capabilities = DesiredCapabilities.firefox();
-            //install plugin
-            FirefoxProfile firefoxProfile = new FirefoxProfile();
-            File extension = new File("harexporttrigger-0.5.0-beta.10.xpi");
-            try {
-                firefoxProfile.addExtension(extension);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            //enable HAR
-            firefoxProfile.setPreference("extensions.netmonitor.har.enableAutomation", true);
-            firefoxProfile.setPreference("extensions.netmonitor.har.contentAPIToken", "test");
-            firefoxProfile.setPreference("extensions.netmonitor.har.autoConnect", true);
-            firefoxProfile.setPreference("devtools.netmonitor.har.enableAutoExportToFile", true);
-            //set FF profile
-            capabilities.setCapability(FirefoxDriver.PROFILE, firefoxProfile);
-
-            System.setProperty("webdriver.gecko.driver", "geckodriver.exe");
-            capabilities.setCapability("marionette", true);
-            driver = new FirefoxDriver(capabilities);
-            WebDriverRunner.setWebDriver(driver);
+        }
+        if (browser == Browsers.IE){
+            capabilities = DesiredCapabilities.internetExplorer();
+        }
+        if (browser == Browsers.PhantomJS){
+            capabilities = DesiredCapabilities.phantomjs();
+            capabilities.setBrowserName("phantomjs");
         }
         try {
             return driver = new RemoteWebDriver(new URL(URL),capabilities);

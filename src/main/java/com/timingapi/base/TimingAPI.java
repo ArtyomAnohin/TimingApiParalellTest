@@ -19,13 +19,13 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 
 /**
- * Created by User on 22-Nov-16.
+ * Created by artyom on 22-Nov-16.
  */
 public class TimingAPI {
     public static void getPageLoadTime() {
         //Object pageLoadTime = ((JavascriptExecutor) getWebDriver()).executeScript("return window.performance.timing.domContentLoadedEventEnd-window.performance.timing.navigationStart;");
         String pageLoadTimingJson =((JavascriptExecutor) getWebDriver()).executeScript("return JSON.stringify(window.performance.timing);").toString().replace("\"","'");
-        String pageResourcesJson =((JavascriptExecutor) getWebDriver()).executeScript("return JSON.stringify(window.performance.getEntries());").toString().replace("\"","'");
+        //String pageResourcesJson =((JavascriptExecutor) getWebDriver()).executeScript("return JSON.stringify(window.performance.getEntries());").toString().replace("\"","'");
 
         PageLoadTiming pageLoadTiming = new Gson().fromJson(pageLoadTimingJson, PageLoadTiming.class);
 
