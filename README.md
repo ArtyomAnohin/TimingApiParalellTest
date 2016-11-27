@@ -7,12 +7,16 @@ To start please run:
 
 Compose container
 
-` docker-compose up -d
+` docker-compose up -d `
 
 Scale nodes
 
-` docker-compose scale chromenode=<number>`
+` docker-compose scale chromenode=<number> `
 
 VNC p:5900 pass secret
 
 https://github.com/SeleniumHQ/docker-selenium
+
+https://github.com/AkeemMcLennon/docker-selenium-node-phantomjs
+
+https://github.com/stefanprodan/dockprom

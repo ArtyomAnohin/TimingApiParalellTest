@@ -9,7 +9,6 @@ import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.open;
-import static com.timingapi.base.TimingAPI.getHar;
 import static com.timingapi.base.TimingAPI.getPageLoadTime;
 
 /**
@@ -21,7 +20,6 @@ public class SiteSteps extends BaseTest {
     public void openMainPage(Integer inputNumber) {
         open("http://google.com/ncr");
         getPageLoadTime();
-        //getHar();
     }
 
     @Step
@@ -29,14 +27,12 @@ public class SiteSteps extends BaseTest {
         $(By.name("q")).val(word).pressEnter();
         getPageLoadTime();
         $$("#ires .g").shouldHave(size(10));
-        //getHar();
     }
 
     @Step
     public void openFirstLink() {
         $(".r>a").click();
         getPageLoadTime();
-        $$("#ires .g").shouldHave(size(10));
-        //getHar();
+        //$$("#ires .g").shouldHave(size(10));
     }
 }

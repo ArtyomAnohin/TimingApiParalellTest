@@ -55,4 +55,5 @@ public class PageLoadTiming {
     public Long getBackEndTime() {
         return responseStart-navigationStart;
     }
+
 }
