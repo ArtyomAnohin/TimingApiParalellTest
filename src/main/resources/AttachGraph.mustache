@@ -2,24 +2,25 @@
 <html>
 
 <head>
-  <title>Horizontal Bar Chart</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js"></script>
-  <script src="./utils.js"></script>
-  <style>
+    <title>Horizontal Bar Chart</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js"></script>
+    <script src="./utils.js"></script>
+    <style>
   canvas {
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
   }
-  </style>
+
+    </style>
 </head>
 
 <body>
-  <div id="container" style="width: 75%;">
-  <canvas id="canvas"></canvas>
-  </div>
+<div id="container" style="width: 100%;">
+    <canvas id="canvas"></canvas>
+</div>
 
-  <script>
+<script>
 
   var horizontalBarChartData = {
   labels: ["DomainLookupTime", "RedirectionTime", "ServerConnectionTime", "ServerResponseTime", "PageDownloadTime", "DOMInteractiveTime", "DOMContentLoadedTime","FrontEndTime","BackEndTime","PageLoadTime"],
@@ -85,7 +86,7 @@ display: false
   },
   title: {
   display: true,
-  text: 'This is a Title'
+  text: 'Timing API'
   },
 tooltips: {
 callbacks: {
@@ -99,7 +100,8 @@ return "Time: "+tooltipItem.xLabel+" ms.";
 
   };
 
-  </script>
+
+</script>
 </body>
 
 </html>

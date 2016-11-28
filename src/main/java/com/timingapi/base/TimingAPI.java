@@ -35,10 +35,10 @@ public class TimingAPI extends BaseTest{
         }
         String data = writer.toString();
         saveHtmlAttach(pageLoadTiming.getPageLoadTime(),data);
-        //collect data
+        //collectPerUser data
         StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
         String methodName = stacktrace[2].getMethodName();
-        collect(methodName,pageLoadTiming.getPageLoadTime());
+        collectPerUser(methodName,pageLoadTiming.getPageLoadTime());
     }
 
     @Attachment(value = "Page load time {0} ms", type = "text/html")
@@ -46,4 +46,8 @@ public class TimingAPI extends BaseTest{
         return attachName.getBytes();
     }
 
+    @Attachment(value = "Result", type = "text/html")
+    public static byte[] saveHtmlAttachAll(String attachName) {
+        return attachName.getBytes();
+    }
 }
