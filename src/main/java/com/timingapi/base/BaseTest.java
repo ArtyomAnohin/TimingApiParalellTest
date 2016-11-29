@@ -15,6 +15,7 @@ import java.net.URL;
 import java.util.*;
 
 import static com.timingapi.base.TimingAPI.saveHtmlAttachAll;
+import static com.timingapi.base.TimingAPI.saveHtmlAttachAllTable;
 
 /**
  * Created by artyom
@@ -28,7 +29,7 @@ public class BaseTest {
 
     @DataProvider(name = "test1", parallel = true)
     public static Object[][] primeNumbers() {
-        return new Object[][]{{1},{2},{3},{4}};
+        return new Object[][]{{1, "vasia", "pupkin"}, {2, "admin", "123"}};
     }
 
     public WebDriver setUp(Browsers browser) {
@@ -60,24 +61,23 @@ public class BaseTest {
         driver.quit();
     }
 
-    public static Map<String, Long> stepsTiming = new HashMap<>();
+    public static Map<String, PageLoadTiming> stepsTiming = new LinkedHashMap<>();
 
-    public static void collectPerUser(String step, Long time) {
-        stepsTiming.put(step, time);
+    public static void collectPerUser(String step, PageLoadTiming time) {
+        stepsTiming.put(camelCaseToNormal(step), time);
     }
 
-    public void collectTimeEachUser(Integer inputNumber){
+    public void collectTimeEachUser(Integer inputNumber) {
         List<CollectStepsTime.StepTime> list = new ArrayList<>();
-        stepsTiming.forEach((k,v)->{
-            list.add(new CollectStepsTime.StepTime(k,v));
-        });
-        listUsersTiming.add(new CollectStepsTime.Item("User" + inputNumber, list));
+        stepsTiming.forEach((k, v) -> list.add(new CollectStepsTime.StepTime(k, v)));
+        listUsersTiming.add(new CollectStepsTime.Item("User " + inputNumber, list));
     }
-    public void getAllTiming(){
+
+    public void getAllTiming() {
         Writer writer = new StringWriter();
         MustacheFactory mf = new DefaultMustacheFactory();
         Mustache mustache = mf.compile("AttachGraphAllUsers.mustache");
-        mustache.execute(writer,  new CollectStepsTime());
+        mustache.execute(writer, new CollectStepsTime());
         try {
             writer.flush();
         } catch (IOException e) {
@@ -85,12 +85,43 @@ public class BaseTest {
         }
         String data = writer.toString();
         saveHtmlAttachAll(data);
+        //DEBUG - saving to file
         try {
-            try(  PrintWriter out = new PrintWriter( "filename.html" )  ){
-                out.println( data );
+            try (PrintWriter out = new PrintWriter("target/graph.html")) {
+                out.println(data);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public void getAllTimingTable() {
+        Writer writer = new StringWriter();
+        MustacheFactory mf = new DefaultMustacheFactory();
+        Mustache mustache = mf.compile("AttachTable.mustache");
+        mustache.execute(writer, new CollectStepsTime());
+        try {
+            writer.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String data = writer.toString();
+        saveHtmlAttachAllTable(data);
+        //DEBUG - saving to file
+        try {
+            try (PrintWriter out = new PrintWriter("target/table.html")) {
+                out.println(data);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String camelCaseToNormal(String str) {
+        String out = "";
+        for (String w : str.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])")) {
+            out += w.replace(w.charAt(0), Character.toUpperCase(w.charAt(0))) + " ";
+        }
+        return out.trim();
     }
 }

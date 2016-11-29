@@ -31,7 +31,7 @@
                         label: "{{name}}",
                         backgroundColor: "rgba(0, 0, 0, 0)",
                         borderColor: 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')',
-                        data: [{{#stepTimes}}{{time}},{{/stepTimes}}],
+                        data: [{{#stepTimes}}{{time.getPageLoadTime}},{{/stepTimes}}],
                         fill: false,
                     },
                     {{/items}}

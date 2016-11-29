@@ -13,13 +13,12 @@ import java.io.Writer;
 
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
-
 /**
- * Created by artyom on 22-Nov-16.
+ * Created by artyom
  */
-public class TimingAPI extends BaseTest{
+public class TimingAPI extends BaseTest {
     public static void getPageLoadTime() {
-        String pageLoadTimingJson =((JavascriptExecutor) getWebDriver()).executeScript("return JSON.stringify(window.performance.timing);").toString().replace("\"","'");
+        String pageLoadTimingJson = ((JavascriptExecutor) getWebDriver()).executeScript("return JSON.stringify(window.performance.timing);").toString().replace("\"", "'");
         //String pageResourcesJson =((JavascriptExecutor) getWebDriver()).executeScript("return JSON.stringify(window.performance.getEntries());").toString().replace("\"","'");
 
         PageLoadTiming pageLoadTiming = new Gson().fromJson(pageLoadTimingJson, PageLoadTiming.class);
@@ -34,11 +33,11 @@ public class TimingAPI extends BaseTest{
             e.printStackTrace();
         }
         String data = writer.toString();
-        saveHtmlAttach(pageLoadTiming.getPageLoadTime(),data);
+        saveHtmlAttach(pageLoadTiming.getPageLoadTime(), data);
         //collectPerUser data
         StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
         String methodName = stacktrace[2].getMethodName();
-        collectPerUser(methodName,pageLoadTiming.getPageLoadTime());
+        collectPerUser(methodName, pageLoadTiming);
     }
 
     @Attachment(value = "Page load time {0} ms", type = "text/html")
@@ -46,8 +45,13 @@ public class TimingAPI extends BaseTest{
         return attachName.getBytes();
     }
 
-    @Attachment(value = "Result", type = "text/html")
+    @Attachment(value = "Result Graph", type = "text/html")
     public static byte[] saveHtmlAttachAll(String attachName) {
+        return attachName.getBytes();
+    }
+
+    @Attachment(value = "Result Table", type = "text/html")
+    public static byte[] saveHtmlAttachAllTable(String attachName) {
         return attachName.getBytes();
     }
 }

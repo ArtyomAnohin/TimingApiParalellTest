@@ -1,7 +1,7 @@
 package com.timingapi.base;
 
 /**
- * Created by artyom on 24-Nov-16.
+ * Created by artyom
  */
 public enum Browsers {
     Firefox,Chrome,IE,PhantomJS

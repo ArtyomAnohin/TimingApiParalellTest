@@ -20,14 +20,10 @@ public abstract class CustomCondition extends com.codeborne.selenide.Condition {
             return element.getText();
         }
 
-
         @Override
         public String toString() {
-
             return "above zero";
-
         }
-
     };
 
     public CustomCondition(String name) {

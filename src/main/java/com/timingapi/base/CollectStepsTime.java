@@ -3,12 +3,12 @@ package com.timingapi.base;
 import java.util.List;
 
 /**
- * Created by User on 27-Nov-16.
+ * Created by artyom
  */
-public class CollectStepsTime extends BaseTest{
-
+public class CollectStepsTime extends BaseTest {
 
     public static List<Item> items() {
+        listUsersTiming.sort((a, b) -> a.name.compareTo(b.name));
         return listUsersTiming;
     }
 
@@ -24,13 +24,13 @@ public class CollectStepsTime extends BaseTest{
     }
 
     static class StepTime {
-        StepTime(String description, Long time) {
+        StepTime(String description, PageLoadTiming time) {
             this.description = description;
             this.time = time;
         }
 
         String description;
-        Long time;
+        PageLoadTiming time;
     }
 
 }
